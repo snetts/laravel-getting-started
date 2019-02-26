@@ -1,7 +1,9 @@
 <?php
 
+use App\Services\Twitter;
 use Illuminate\Filesystem\Filesystem;
 use App\Http\Controllers\ProjectsController;
+use App\Repositories\UserRepository;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,13 +25,18 @@ use App\Http\Controllers\ProjectsController;
     PATCH /projects/1 (update) update a project
     DELETE /projects/1 (destroy) delete a project
  */
-app()->singleton('App\Services\Twitter', function () {
-    return new \App\Services\Twitter('dafafasfsafa');
-});
+// app()->singleton('App\Services\Twitter', function () {
+//     return new \App\Services\Twitter('dafafasfsafa');
+// });
 
-Route::get('/', function () {
+Route::get('/', function() {
     return view('welcome');
 });
+
+
+// Route::get('/users', function (UserRepository $users) {
+//     dd($users);
+// });
 
 /* Is the equivalent of all below. */
 Route::resource('projects', 'ProjectsController');
@@ -55,3 +62,6 @@ Route::delete('/tasks/completed/{tasks}', 'CompletedTasksController@destroy');
 // Route::patch('/projects/{project}/update', 'ProjectsController@update');
 
 // Route::delete('/projects/{project}/delete', 'ProjectsController@destroy');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
