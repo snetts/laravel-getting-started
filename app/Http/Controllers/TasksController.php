@@ -81,10 +81,13 @@ class TasksController extends Controller
      */
     public function update(Request $request, Tasks $tasks)
     {
+        $method = $request->has('completed') ? 'complete' : 'incomplete';
 
-        $tasks->update([
-            'completed' => request()->has('completed')
-        ]);
+        $tasks->$method();
+        // $tasks->complete($request->has('completed'));
+        // $tasks->update([
+        //     'completed' => request()->has('completed')
+        // ]);
 
         return back();
     }

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Filesystem\Filesystem;
 use App\Http\Controllers\ProjectsController;
 
 /*
@@ -34,6 +35,10 @@ Route::resource('projects', 'ProjectsController');
 Route::patch('/tasks/{tasks}', 'TasksController@update');  // must correspond to the name of the model in this case Tasks.php
 
 Route::post('/projects/{project}/tasks', 'TasksController@store');
+
+Route::post('/tasks/completed/{tasks}', 'CompletedTasksController@store');
+
+Route::delete('/tasks/completed/{tasks}', 'CompletedTasksController@destroy');
 
 // Route::get('/projects', 'ProjectsController@index');
 
