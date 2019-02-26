@@ -23,11 +23,13 @@ use App\Http\Controllers\ProjectsController;
     PATCH /projects/1 (update) update a project
     DELETE /projects/1 (destroy) delete a project
  */
+app()->singleton('App\Services\Twitter', function () {
+    return new \App\Services\Twitter('dafafasfsafa');
+});
 
 Route::get('/', function () {
     return view('welcome');
 });
-
 
 /* Is the equivalent of all below. */
 Route::resource('projects', 'ProjectsController');
