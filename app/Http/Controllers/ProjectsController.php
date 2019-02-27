@@ -20,6 +20,7 @@ class ProjectsController extends Controller
         // auth()->check(); // check whether user is logged in returns true or false
         // auth()->guest(); // checks whether user is guest
 
+        // getting only current users projects
         $projects = Project::where('owner_id', auth()->id())->get();
 
         // return $projects; returns JSON format
@@ -63,14 +64,22 @@ class ProjectsController extends Controller
 
         // return $project; returning projects as a JSON
 
+        $this->authorize('valid', $project);
+
         return view('projects.show', ['project' => $project]);
     }
 
     public function edit(Project $project) {
+
+        $this->authorize('valid', $project);
+
         return view('projects.edit', ['project' => $project]);
     }
 
     public function update(Project $project) {
+
+        $this->authorize('valid', $project);
+
 
         request()->validate([
             'title' => ['required', 'min:3'],
@@ -88,6 +97,8 @@ class ProjectsController extends Controller
     }
 
     public function destroy(Project $project) {
+
+        $this->authorize('valid', $project);
         
         $project->delete();
 

@@ -33,7 +33,7 @@
                 @csrf
                 <div class="control">
                     <label class="text" for="desc">
-                        <input class="input" type="text" name="desc" id="desc" placeholder="Enter task..." required/>>
+                        <input class="input" type="text" name="desc" id="desc" placeholder="Enter task..." required/>
                     </label>
                 </div>
                 <br>
