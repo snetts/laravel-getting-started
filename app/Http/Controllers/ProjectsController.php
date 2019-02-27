@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use \App\Models\Project;
 
 use App\Services\Twitter;
-use Illuminate\Http\Request;
 use App\Mail\ProjectCreated;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ProjectsController extends Controller
 {
@@ -54,7 +55,7 @@ class ProjectsController extends Controller
         // $project->save();
 
         // Testing mailing
-        \Mail::to('snettsblog@snetts.com')->send(
+        Mail::to($project->owner->email)->send(
             new ProjectCreated($project)
         );
 

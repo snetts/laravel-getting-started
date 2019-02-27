@@ -14,6 +14,11 @@ class Project extends Model
         return $this->hasMany(Tasks::class);
     }
 
+    public function owner()
+    {
+        return $this->belongsTo(\App\User::class);
+    }
+
 
     // code nelow works fine and is recommended but I don't want to write code twice
     // public function addTask($tasks) {
