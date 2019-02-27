@@ -8,6 +8,7 @@ use App\Services\Twitter;
 use App\Mail\ProjectCreated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Events\EventProjectCreated;
 
 class ProjectsController extends Controller
 {
@@ -28,6 +29,11 @@ class ProjectsController extends Controller
 
         // return $projects; returns JSON format
         return view('projects.index', ['projects' => $projects]);
+    }
+
+    public function create()
+    {
+        return view('projects.create');
     }
 
     public function store() {
@@ -53,12 +59,9 @@ class ProjectsController extends Controller
         // $project->desc = request('desc');
 
         // $project->save();
+        // event(new EventProjectCreated($project)); replaced by dispatcheEvents in Models\Project
+        
         return redirect('/projects');
-    }
-
-    public function create()
-    {
-        return view('projects.create');
     }
 
     public function show(Project $project, Twitter $twitter) {
