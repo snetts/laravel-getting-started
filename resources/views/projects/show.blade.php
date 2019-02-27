@@ -2,7 +2,7 @@
 
 @section('content')
     <header>
-        <h1 class="title">{{ $project->title }}</h1>
+        <h1 class="title">{{ $project->title }}</h1><br>
     </header>
 
     <section>
@@ -20,7 +20,7 @@
                                 @endif
                                 @csrf
                                 <label class="checkbox {{ $task->completed ? 'is-complete' : ''}}" for="completed">
-                                    <input type="checkbox" name="completed" id="completed" class="checkbox " onChange="this.form.submit()" {{ $task->completed ? 'checked' : ''}}>
+                                    <input type="checkbox" name="completed" id="completed" class="checkbox" onChange="this.form.submit()" {{ $task->completed ? 'checked' : ''}}>
                                     {{ $task->desc }}
                                 </label>
                             </form>
@@ -33,7 +33,7 @@
                 @csrf
                 <div class="control">
                     <label class="text" for="desc">
-                        <input type="text" name="desc" id="desc" placeholder="Enter task..." required>
+                        <input class="input" type="text" name="desc" id="desc" placeholder="Enter task..." required/>>
                     </label>
                 </div>
                 <br>

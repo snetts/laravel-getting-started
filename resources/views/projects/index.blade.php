@@ -1,7 +1,7 @@
 @extends('layout')
 @section('content')
     <header>
-        <h1 class="title">Projects</h1>
+        <h1 class="title">Projects</h1><br>
     </header>
     <section>
         @foreach ($projects as $project)

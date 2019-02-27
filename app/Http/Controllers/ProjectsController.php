@@ -9,8 +9,18 @@ use Illuminate\Http\Request;
 
 class ProjectsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index() {
-        $projects = Project::all();
+        // auth()->id(); // fetches current user id
+        // auth()->user(); // fetches current user
+        // auth()->check(); // check whether user is logged in returns true or false
+        // auth()->guest(); // checks whether user is guest
+
+        $projects = Project::where('owner_id', auth()->id())->get();
 
         // return $projects; returns JSON format
         return view('projects.index', ['projects' => $projects]);
@@ -22,7 +32,8 @@ class ProjectsController extends Controller
             'title' => ['required', 'min:6'],
             'desc' => ['required', 'max:255'],
         ]);
-
+        
+        $validate['owner_id'] = auth()->id();
             
         Project::create($validate);
         // this code cleans up the code below
@@ -51,8 +62,6 @@ class ProjectsController extends Controller
         //$project = Project::findOrFail();
 
         // return $project; returning projects as a JSON
-
-        dd($twitter);
 
         return view('projects.show', ['project' => $project]);
     }
