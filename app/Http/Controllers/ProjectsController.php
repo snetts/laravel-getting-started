@@ -6,6 +6,7 @@ use \App\Models\Project;
 
 use App\Services\Twitter;
 use Illuminate\Http\Request;
+use App\Mail\ProjectCreated;
 
 class ProjectsController extends Controller
 {
@@ -36,7 +37,7 @@ class ProjectsController extends Controller
         
         $validate['owner_id'] = auth()->id();
             
-        Project::create($validate);
+        $project = Project::create($validate);
         // this code cleans up the code below
         // Project::create([
         //     'title' => request('title'),
@@ -50,6 +51,11 @@ class ProjectsController extends Controller
         // $project->desc = request('desc');
 
         // $project->save();
+
+        // Testing mailing
+        \Mail::to('snettsblog@snetts.com')->send(
+            new ProjectCreated($project)
+        );
 
         return redirect('/projects');
     }
