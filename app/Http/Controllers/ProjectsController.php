@@ -22,7 +22,8 @@ class ProjectsController extends Controller
         // auth()->guest(); // checks whether user is guest
 
         // getting only current users projects
-        $projects = Project::where('owner_id', auth()->id())->get();
+        $projects = auth()->user()->projects;
+        // $projects = Project::where('owner_id', auth()->id())->get();
 
         // return $projects; returns JSON format
         return view('projects.index', ['projects' => $projects]);
@@ -32,7 +33,7 @@ class ProjectsController extends Controller
 
         $validate = request()->validate([
             'title' => ['required', 'min:6'],
-            'desc' => ['required', 'max:255'],
+            'desc' => ['required', 'max:500'],
         ]);
         
         $validate['owner_id'] = auth()->id();
