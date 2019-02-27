@@ -39,7 +39,7 @@ class ProjectsController extends Controller
         
         $validate['owner_id'] = auth()->id();
             
-        $project = Project::create($validate);
+        Project::create($validate);
         // this code cleans up the code below
         // Project::create([
         //     'title' => request('title'),
@@ -53,12 +53,6 @@ class ProjectsController extends Controller
         // $project->desc = request('desc');
 
         // $project->save();
-
-        // Testing mailing
-        Mail::to($project->owner->email)->send(
-            new ProjectCreated($project)
-        );
-
         return redirect('/projects');
     }
 
